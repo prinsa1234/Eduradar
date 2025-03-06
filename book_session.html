@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Session - EduRadar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f4f7fa;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #1a56db;
+            color: white;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-content h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-content p {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        .back-btn {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            border-radius: 0.375rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background-color: white;
+            color: #1a56db;
+        }
+
+        /* Main Content Styles */
+        main {
+            flex: 1;
+            padding: 2rem 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .card-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .tab-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            list-style: none;
+        }
+
+        .tab-item {
+            text-align: center;
+        }
+
+        .tab-button {
+            width: 100%;
+            padding: 0.75rem;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #6b7280;
+            transition: all 0.2s ease;
+        }
+
+        .tab-button.active {
+            color: #1a56db;
+            border-bottom-color: #1a56db;
+        }
+
+        .tab-button:hover:not(.active) {
+            color: #374151;
+            background-color: #f9fafb;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 1.5rem 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Booking Tab */
+        .booking-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .booking-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .booking-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-section h3 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .booking-section h3 i {
+            color: #1a56db;
+        }
+
+        /* Calendar */
+        .calendar {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            background-color: white;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-title {
+            font-weight: 500;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .calendar-nav button {
+            background: none;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.25rem;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .calendar-nav button:hover {
+            background-color: #f9fafb;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.25rem;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #6b7280;
+            padding: 0.5rem 0;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .calendar-day:hover:not(.disabled) {
+            background-color: #f3f4f6;
+        }
+
+        .calendar-day.selected {
+            background-color: #1a56db;
+            color: white;
+        }
+
+        .calendar-day.disabled {
+            color: #d1d5db;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.today {
+            font-weight: bold;
+            border: 1px solid #1a56db;
+        }
+
+        /* Time Slots */
+        .time-slots {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .time-slot {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .time-slot input[type="radio"] {
+            display: none;
+        }
+
+        .time-slot label {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .time-slot input[type="radio"]:checked + label {
+            border-color: #1a56db;
+            background-color: #eff6ff;
+        }
+
+        .time-slot label:hover {
+            background-color: #f9fafb;
+        }
+
+        /* Venue Selection */
+        .venue-options {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .venue-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .venue-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .venue-option input[type="radio"] {
+            display: none;
+        }
+
+        .venue-option label {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .venue-option input[type="radio"]:checked + label {
+            border-color: #1a56db;
+            background-color: #eff6ff;
+        }
+
+        .venue-option label:hover {
+            background-color: #f9fafb;
+        }
+
+        /* Payment Info */
+        .payment-info {
+            background-color: #f9fafb;
+            border-radius: 0.375rem;
+            padding: 1rem;
+        }
+
+        .payment-info p:first-child {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-info p:last-child {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Details Tab */
+        .tutor-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .tutor-details h3 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .details-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .details-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .detail-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-item strong {
+            font-weight: 500;
+        }
+
+        .policy-list {
+            list-style-position: inside;
+            margin-top: 0.5rem;
+        }
+
+        .policy-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Chat Tab */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            max-width: 80%;
+        }
+
+        .message-tutor {
+            align-self: flex-start;
+        }
+
+        .message-user {
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .message-content {
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+        }
+
+        .message-tutor .message-content {
+            background-color: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .message-user .message-content {
+            background-color: #1a56db;
+            color: white;
+        }
+
+        .message-sender {
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .message-tutor .message-sender {
+            color: #111827;
+        }
+
+        .message-user .message-sender {
+            color: white;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .chat-input button {
+            background-color: #1a56db;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-input button:hover {
+            background-color: #1e429f;
+        }
+
+        /* Query Tab */
+        .query-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .file-upload {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .file-upload button {
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .file-upload button:hover {
+            background-color: #f9fafb;
+        }
+
+        .file-upload span {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: #1a56db;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #1e429f;
+        }
+
+        .btn-primary:disabled {
+            background-color: #93c5fd;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background-color: white;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-outline:hover {
+            background-color: #f9fafb;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>EduRadar</h1>
+                    <p id="headerSubtitle">Book your session</p>
+                </div>
+                <button class="back-btn" onclick="window.location.href='index.html'">
+                    <i class="fas fa-arrow-left"></i> Back to Tutors
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title" id="bookingTitle">Book a Session</h2>
+                    <p class="card-description" id="bookingSubject">Subject: </p>
+                </div>
+                <div class="card-content">
+                    <div class="tabs">
+                        <ul class="tab-list">
+                            <li class="tab-item">
+                                <button class="tab-button active" data-tab="booking">Booking</button>
+                            </li>
+                            <li class="tab-item">
+                                <button class="tab-button" data-tab="details">Details</button>
+                            </li>
+                            <li class="tab-item">
+                                <button class="tab-button" data-tab="chat">Chat</button>
+                            </li>
+                            <li class="tab-item">
+                                <button class="tab-button" data-tab="query">Query</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Booking Tab -->
+                    <div id="bookingTab" class="tab-content active">
+                        <div class="booking-grid">
+                            <div class="booking-section">
+                                <h3><i class="fas fa-calendar"></i> Select Date</h3>
+                                <div class="calendar">
+                                    <div class="calendar-header">
+                                        <span class="calendar-title" id="calendarMonth">March 2024</span>
+                                        <div class="calendar-nav">
+                                            <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                                            <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="calendar-grid" id="calendarGrid">
+                                        <!-- Calendar days will be generated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="booking-section">
+                                <h3><i class="fas fa-clock"></i> Select Time Slot</h3>
+                                <div class="time-slots">
+                                    <div class="time-slot">
+                                        <input type="radio" name="timeSlot" id="slot1" value="9:00 AM - 10:00 AM">
+                                        <label for="slot1">9:00 AM - 10:00 AM</label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="radio" name="timeSlot" id="slot2" value="10:30 AM - 11:30 AM">
+                                        <label for="slot2">10:30 AM - 11:30 AM</label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="radio" name="timeSlot" id="slot3" value="1:00 PM - 2:00 PM">
+                                        <label for="slot3">1:00 PM - 2:00 PM</label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="radio" name="timeSlot" id="slot4" value="3:30 PM - 4:30 PM">
+                                        <label for="slot4">3:30 PM - 4:30 PM</label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="radio" name="timeSlot" id="slot5" value="5:00 PM - 6:00 PM">
+                                        <label for="slot5">5:00 PM - 6:00 PM</label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="radio" name="timeSlot" id="slot6" value="7:00 PM - 8:00 PM">
+                                        <label for="slot6">7:00 PM - 8:00 PM</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="booking-section">
+                            <h3><i class="fas fa-map-marker-alt"></i> Select Venue</h3>
+                            <div class="venue-options">
+                                <div class="venue-option">
+                                    <input type="radio" name="venue" id="venue1" value="online" checked>
+                                    <label for="venue1">Online</label>
+                                </div>
+                                <div class="venue-option">
+                                    <input type="radio" name="venue" id="venue2" value="tutor-place">
+                                    <label for="venue2">Tutor's Place</label>
+                                </div>
+                                <div class="venue-option">
+                                    <input type="radio" name="venue" id="venue3" value="student-home">
+                                    <label for="venue3">Student's Home</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="booking-section">
+                            <h3><i class="fas fa-credit-card"></i> Payment Details</h3>
+                            <div class="payment-info">
+                                <p>₹800 per hour</p>
+                                <p>Payment will be collected after the session</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Details Tab -->
+                    <div id="detailsTab" class="tab-content">
+                        <div class="tutor-details">
+                            <h3>Tutor Information</h3>
+                            <div class="details-grid">
+                                <div>
+                                    <p class="detail-item"><strong>Name:</strong> <span id="tutorName"></span></p>
+                                    <p class="detail-item"><strong>Subject:</strong> <span id="tutorSubject"></span></p>
+                                    <p class="detail-item"><strong>Fees:</strong> ₹800 per hour</p>
+                                </div>
+                                <div>
+                                    <p class="detail-item"><strong>Email:</strong> tutor@eduradar.com</p>
+                                    <p class="detail-item"><strong>Phone:</strong> +91 9876543210</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tutor-details">
+                            <h3>Session Policy</h3>
+                            <ul class="policy-list">
+                                <li>Cancellations must be made at least 24 hours in advance</li>
+                                <li>Sessions can be rescheduled up to 2 times</li>
+                                <li>Payment is due at the end of each session</li>
+                                <li>Online sessions require a stable internet connection</li>
+                                <li>For in-person sessions, travel expenses may apply</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chat Tab -->
+                    <div id="chatTab" class="tab-content">
+                        <div class="chat-container">
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="message message-tutor">
+                                    <div class="message-content">
+                                        <div class="message-sender">Tutor</div>
+                                        <p>Hello! How can I help you with your studies?</p>
+                                    </div>
+                                </div>
+                                <div class="message message-user">
+                                    <div class="message-content">
+                                        <div class="message-sender">You</div>
+                                        <p>Hi! I'm interested in booking a session to improve my understanding.</p>
+                                    </div>
+                                </div>
+                                <div class="message message-tutor">
+                                    <div class="message-content">
+                                        <div class="message-sender">Tutor</div>
+                                        <p>Great! I'd be happy to help. What specific topics are you struggling with?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" id="messageInput" placeholder="Type your message...">
+                                <button id="sendMessage"><i class="fas fa-paper-plane"></i> Send</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Query Tab -->
+                    <div id="queryTab" class="tab-content">
+                        <form class="query-form">
+                            <div class="form-group">
+                                <label for="querySubject">Subject</label>
+                                <input type="text" id="querySubject" placeholder="Enter subject of your query">
+                            </div>
+                            <div class="form-group">
+                                <label for="queryMessage">Your Query</label>
+                                <textarea id="queryMessage" placeholder="Describe your question or concern in detail..."></textarea>
+                            </div>
+                            <div class="file-upload">
+                                <input type="file" id="attachment" class="hidden">
+                                <button type="button" onclick="document.getElementById('attachment').click()">Attach File</button>
+                                <span>Optional: Attach relevant documents</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-outline" onclick="window.location.href='index.html'">Cancel</button>
+                    <button id="confirmButton" class="btn btn-primary" disabled>Confirm Booking</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 EduRadar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const tutorName = urlParams.get('tutor') || 'Tutor';
+        const subject = urlParams.get('subject') || 'Subject';
+
+        // Update page with tutor info
+        document.getElementById('headerSubtitle').textContent = `Book your session with ${tutorName}`;
+        document.getElementById('bookingTitle').textContent = `Book a Session with ${tutorName}`;
+        document.getElementById('bookingSubject').textContent = `Subject: ${subject}`;
+        document.getElementById('tutorName').textContent = tutorName;
+        document.getElementById('tutorSubject').textContent = subject;
+
+        // Tab switching
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const confirmButton = document.getElementById('confirmButton');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(`${tabId}Tab`).classList.add('active');
+
+                // Update confirm button based on active tab
+                if (tabId === 'booking') {
+                    confirmButton.textContent = 'Confirm Booking';
+                    validateBookingForm();
+                } else if (tabId === 'query') {
+                    confirmButton.textContent = 'Submit Query';
+                    confirmButton.disabled = false;
+                } else if (tabId === 'details') {
+                    confirmButton.textContent = 'Proceed to Booking';
+                    confirmButton.disabled = false;
+                } else {
+                    confirmButton.style.display = 'none';
+                }
+            });
+        });
+
+        // Calendar functionality
+        const calendarGrid = document.getElementById('calendarGrid');
+        const calendarMonthEl = document.getElementById('calendarMonth');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+
+        let currentDate = new Date();
+        let selectedDate = null;
+
+        function generateCalendar(year, month) {
+            calendarGrid.innerHTML = '';
+
+            // Add day headers
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            days.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = day;
+                calendarGrid.appendChild(dayHeader);
+            });
+
+            // Get first day of month and number of days
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            
+            // Fill in empty cells for days before first day of month
+            for (let i = 0; i < firstDay.getDay(); i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day';
+                calendarGrid.appendChild(emptyDay);
+            }
+
+            // Fill in days of month
+            const today = new Date();
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+                dayEl.textContent = i;
+                
+                const currentDateObj = new Date(year, month, i);
+                
+                // Check if day is in the past
+                if (currentDateObj < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+                    dayEl.classList.add('disabled');
+                } else {
+                    dayEl.addEventListener('click', () => {
+                        // Remove selected class from all days
+                        document.querySelectorAll('.calendar-day.selected').forEach(el => {
+                            el.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked day
+                        dayEl.classList.add('selected');
+                        selectedDate = new Date(year, month, i);
+                        validateBookingForm();
+                    });
+                }
+                
+                // Check if day is today
+                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    dayEl.classList.add('today');
+                }
+                
+                // Check if day is selected
+                if (selectedDate && i === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) {
+                    dayEl.classList.add('selected');
+                }
+                
+                calendarGrid.appendChild(dayEl);
+            }
+
+            // Update month display
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            calendarMonthEl.textContent = `${monthNames[month]} ${year}`;
+        }
+
+        // Initialize calendar
+        generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+
+        // Previous month button
+        prevMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        });
+
+        // Next month button
+        nextMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        });
+
+        // Time slot selection
+        const timeSlots = document.querySelectorAll('input[name="timeSlot"]');
+        timeSlots.forEach(slot => {
+            slot.addEventListener('change', validateBookingForm);
+        });
+
+        // Validate booking form
+        function validateBookingForm() {
+            const timeSlotSelected = document.querySelector('input[name="timeSlot"]:checked');
+            confirmButton.disabled = !(selectedDate && timeSlotSelected);
+        }
+
+        // Confirm booking button
+        confirmButton.addEventListener('click', () => {
+            const activeTab = document.querySelector('.tab-button.active').getAttribute('data-tab');
+            
+            if (activeTab === 'booking') {
+                const selectedTimeSlot = document.querySelector('input[name="timeSlot"]:checked').value;
+                const selectedVenue = document.querySelector('input[name="venue"]:checked').value;
+                
+                const formattedDate = selectedDate.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                alert(`Booking Confirmed!\n\nTutor: ${tutorName}\nSubject: ${subject}\nDate: ${formattedDate}\nTime: ${selectedTimeSlot}\nVenue: ${selectedVenue}`);
+                
+                // Redirect back to home page
+                window.location.href = 'index.html';
+            } else if (activeTab === 'query') {
+                const querySubject = document.getElementById('querySubject').value;
+                const queryMessage = document.getElementById('queryMessage').value;
+                
+                if (querySubject && queryMessage) {
+                    alert('Your query has been submitted. We will get back to you soon!');
+                    document.getElementById('querySubject').value = '';
+                    document.getElementById('queryMessage').value = '';
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            } else if (activeTab === 'details') {
+                // Switch to booking tab
+                document.querySelector('.tab-button[data-tab="booking"]').click();
+            }
+        });
+
+        // Chat functionality
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const sendMessageBtn = document.getElementById('sendMessage');
+
+        sendMessageBtn.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                // Create message element
+                const messageEl = document.createElement('div');
+                messageEl.className = 'message message-user';
+                messageEl.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-sender">You</div>
+                        <p>${message}</p>
+                    </div>
+                `;
+                
+                // Add message to chat
+                chatMessages.appendChild(messageEl);
+                
+                // Clear input
+                messageInput.value = '';
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Simulate tutor response after a delay
+                setTimeout(() => {
+                    const responseEl = document.createElement('div');
+                    responseEl.className = 'message message-tutor';
+                    responseEl.innerHTML = `
+                        <div class="message-content">
+                            <div class="message-sender">Tutor</div>
+                            <p>Thanks for your message. I'll get back to you shortly.</p>
+                        </div>
+                    `;
+                    
+                    chatMessages.appendChild(responseEl);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
