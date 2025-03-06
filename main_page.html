@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduRadar - Your Smart Tuition Finder</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>EduRadar</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                
+            </div>
+            <div class="auth-buttons">
+                <button class="btn login-btn" onclick="openLoginModal()">Login</button>
+                <button class="btn signup-btn" onclick="openSignupModal()">Sign Up</button>
+                
+            </div>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find the Best Tuition Classes Near You</h1>
+            <p>EduRadar helps students and parents discover nearby tuition centers and private tutors based on location.</p>
+            <div class="search-container">
+                <input type="text" placeholder="Enter your location" class="location-input">
+                <select class="subject-select">
+                    <option value="">Select Subject</option>
+                    <option value="mathematics">Mathematics</option>
+                    <option value="physics">Physics</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="biology">Biology</option>
+                    <option value="english">English</option>
+                    <option value="computer-science">Computer Science</option>
+                </select>
+                <button class="search-btn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <h2>Key Features</h2>
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Location-Based Search</h3>
+                <p>Find tuitions in your area instantly with our smart location tracking.</p>
+                <a href="location-search.html" class="feature-link">Learn More</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Subject Selection</h3>
+                <p>Search for tutors by subject or course to find the perfect match for your needs.</p>
+                <a href="index.html" class="feature-link">Learn More</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3>Teacher Profiles</h3>
+                <p>View detailed profiles like LinkedIn with qualifications and experience.</p>
+                <a href="teacher-profiles.html" class="feature-link">Learn More</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>Ratings & Reviews</h3>
+                <p>Choose the best tutor based on genuine feedback from other students.</p>
+                <a href="ratings-reviews.html" class="feature-link">Learn More</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Direct Contact & Booking</h3>
+                <p>Call, message, or book online lectures directly through the platform.</p>
+                <a href="booking.html" class="feature-link">Learn More</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Chat with Teacher</h3>
+                <p>Communicate directly with tutors to discuss your learning needs.</p>
+                <a href="chat.html" class="feature-link">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2>About EduRadar</h2>
+            <p>EduRadar is solving a real-time problem faced by students and parents - finding quality tutors in their vicinity. In today's competitive academic environment, personalized tutoring can make all the difference, but finding the right tutor has always been challenging.</p>
+            <p>Our platform bridges this gap by connecting students with qualified tutors in their area, making quality education more accessible to everyone. With EduRadar, you can browse tutor profiles, read reviews, and make informed decisions about your educational journey.</p>
+            <p>Never struggle to find the right tuition again—let EduRadar guide you to the best learning experience!</p>
+        </div>
+        <div class="about-image">
+            <img src="/placeholder.svg?height=400&width=600" alt="Students learning">
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Your Message"></textarea>
+                    </div>
+                    <button type="submit" class="btn submit-btn">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>info@eduradar.com</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+91 9876543210</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>123 Education Street, Learning City</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>EduRadar</h2>
+                <p>Your Smart Tuition Finder</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-features">
+                <h3>Features</h3>
+                <ul>
+                    <li><a href="location-search.html">Location Search</a></li>
+                    <li><a href="index.html">Subject Selection</a></li>
+                    <li><a href="teacher-profiles.html">Teacher Profiles</a></li>
+                    <li><a href="ratings-reviews.html">Ratings & Reviews</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 EduRadar. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login to EduRadar</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group remember-forgot">
+                    <div>
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn login-submit-btn">Login</button>
+            </form>
+            <div class="modal-footer">
+                <p>Don't have an account? <a href="#" onclick="openSignupModal(); closeLoginModal();">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignupModal()">&times;</span>
+            <h2>Sign Up for EduRadar</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPhone">Phone Number</label>
+                    <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="termsAgree" required>
+                    <label for="termsAgree">I agree to the <a href="#">Terms & Conditions</a></label>
+                </div>
+                <button type="submit" class="btn signup-submit-btn">Sign Up</button>
+            </form>
+            <div class="modal-footer">
+                <p>Already have an account? <a href="#" onclick="openLoginModal(); closeSignupModal();">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
