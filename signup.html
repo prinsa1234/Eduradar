@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - EduRadar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #3a86ff 0%, #8338ec 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        
+        .signup-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .signup-logo {
+            margin-bottom: 30px;
+        }
+        
+        .signup-logo h1 {
+            color: #3a86ff;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .signup-form {
+            text-align: left;
+        }
+        
+        .signup-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .user-type {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .user-type-option {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .user-type-option.active {
+            border-color: #3a86ff;
+            background-color: #e6f0ff;
+        }
+        
+        .user-type-option i {
+            font-size: 24px;
+            color: #3a86ff;
+            margin-bottom: 10px;
+        }
+        
+        .user-type-option h3 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        
+        .social-signup {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .facebook {
+            background-color: #3b5998;
+        }
+        
+        .google {
+            background-color: #db4437;
+        }
+        
+        .twitter {
+            background-color: #1da1f2;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #ddd;
+        }
+        
+        .divider span {
+            padding: 0 15px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .back-to-home {
+            display: inline-block;
+            margin-top: 20px;
+            color: #3a86ff;
+            font-weight: 600;
+        }
+        
+        .back-to-home i {
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 576px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-logo">
+            <h1>EduRadar</h1>
+        </div>
+        
+        <form class="signup-form">
+            <h2>Create Your Account</h2>
+            
+            <div class="user-type">
+                <div class="user-type-option active" onclick="selectUserType(this, 'student')">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Student</h3>
+                </div>
+                <div class="user-type-option" onclick="selectUserType(this, 'tutor')">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Tutor</h3>
+                </div>
+                <div class="user-type-option" onclick="selectUserType(this, 'parent')">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Parent</h3>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" placeholder="Last Name" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="Enter your phone number" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="checkbox" id="termsAgree" required>
+                <label for="termsAgree">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
+            </div>
+            
+            <button type="submit" class="btn signup-submit-btn">Create Account</button>
+            
+            <div class="divider">
+                <span>OR SIGN UP WITH</span>
+            </div>
+            
+            <div class="social-signup">
+                <div class="social-btn facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="social-btn google">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="social-btn twitter">
+                    <i class="fab fa-twitter"></i>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </div>
+        </form>
+        
+        <a href="index.html" class="back-to-home">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+    </div>
+    
+    <script>
+        let userType = 'student';
+        
+        function selectUserType(element, type) {
+            // Remove active class from all options
+            document.querySelectorAll('.user-type-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            
+            // Add active class to selected option
+            element.classList.add('active');
+            
+            // Set user type
+            userType = type;
+        }
+        
+        document.querySelector('.signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const termsAgree = document.getElementById('termsAgree').checked;
+            
+            // Basic validation
+            if (!firstName || !lastName || !email || !phone || !password || !confirmPassword) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (!termsAgree) {
+                alert('Please agree to the Terms & Conditions');
+                return;
+            }
+            
+            // Here you would typically send the data to a server
+            // For now, we'll just simulate a successful signup
+            alert(`Account created successfully as a ${userType}!`);
+            
+            // Redirect to dashboard or home page
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
